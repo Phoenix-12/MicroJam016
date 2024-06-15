@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f67c6c262417db740abb36ad2693064d
+guid: a24be253c96a3a642a60e3369a48a558
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,7 +121,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Oxygen
+  - name: Player
     originalName: 
     pivot: {x: 0.5, y: 0}
     alignment: 9
@@ -130,9 +130,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 12
-      height: 32
-    spriteID: a7010bb5622f89b40a742a0f3f4d29ef
+      width: 32
+      height: 31
+    spriteID: 4430d929f0149ad4b9b45fa8246026f4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,21 +144,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1608780398
-    name: Oxygen
+    guid: 1687901567
+    name: Player
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Oxygen
+    - name: Player
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 10
+        x: 0
         y: 0
-        width: 12
-        height: 32
-      spriteId: a7010bb5622f89b40a742a0f3f4d29ef
+        width: 32
+        height: 31
+      spriteId: 4430d929f0149ad4b9b45fa8246026f4
     linkedCells: []
     parentIndex: -1
   platformSettings: []
