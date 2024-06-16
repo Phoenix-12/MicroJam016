@@ -14,7 +14,7 @@ public class PlayerInput : MonoBehaviour
     private void Awake()
     {
         _gameInput = new GameInput();
-
+        _controllable = GetComponent<IPlayerControllable>();
         /*_controllable = GetComponent<IControllable>();
         if (_controllable != null)
             Debug.Log("No Controller Component");*/
