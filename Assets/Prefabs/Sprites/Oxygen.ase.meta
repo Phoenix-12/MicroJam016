@@ -123,7 +123,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Oxygen
     originalName: 
-    pivot: {x: 0.45454547, y: -0.26086956}
+    pivot: {x: 0.45454547, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -155,7 +155,7 @@ ScriptedImporter:
       additiveSortOrder: 0
       cellRect:
         x: 11
-        y: 6
+        y: 0
         width: 11
         height: 23
       spriteId: c293c37b1e66923408735e0f6367735f

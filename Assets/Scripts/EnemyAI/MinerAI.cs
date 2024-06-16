@@ -2,17 +2,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.EventSystems;
 using SpaceUtils.Utils;
-using static UnityEditor.PlayerSettings;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(NavMeshAgent))]
 public class MinerAI : MonoBehaviour, IMiner
 {
-    [SerializeField] private NavMeshAgent _agent;
+    
 
     [SerializeField] private bool _haveGem = false;
     [SerializeField] private MinerState _state;
@@ -22,13 +19,14 @@ public class MinerAI : MonoBehaviour, IMiner
 
     [SerializeField] private float _seeDist = 10000f;
     [SerializeField] private float _pickupDist;
-
+    [SerializeField] private float _giveDist = 10f;
     [SerializeField] private float roamingDistanceMin;
     [SerializeField] private float roamingDistanceMax;
 
     [SerializeField] private float _searchTimerMax = 4f;
+    
     private float _searchTime = 0;
-
+    private NavMeshAgent _agent;
     private Gem _currentGem;
     private Transform _truckTransform;
     private IControllable _controllable;
@@ -97,7 +95,7 @@ public class MinerAI : MonoBehaviour, IMiner
                 break;
 
             case MinerState.ReturnGem:
-                if (Vector3.Distance(_truckTransform.position, transform.position) < _pickupDist)
+                if (Vector3.Distance(_truckTransform.position, transform.position) < _giveDist)
                 {
                     _truck.GiveGem();
                     _haveGem = false;
@@ -120,10 +118,6 @@ public class MinerAI : MonoBehaviour, IMiner
     {
         _agent.SetDestination(pos);
         RotateToVec(pos);
-        //transform.up = pos - transform.position;
-
-        //_controllable.LookAt(_truckTransform.position);
-        //_controllable.MoveTo(_truckTransform.position);
     }
     private void RotateToVec(Vector3 pos) => transform.up = Vector2.MoveTowards(transform.up, pos - transform.position, Time.deltaTime* 10f);
     private void GoToTruck()
@@ -134,7 +128,6 @@ public class MinerAI : MonoBehaviour, IMiner
     public bool IsSeeGem()
     {
         var nearestGem = _gemList.GetNearestGem(transform.position);
-        //Debug.Log(nearestGem);
         if (nearestGem != null)
         {
             var distToNearestGem = Vector3.Distance(nearestGem.transform.position, transform.position);
@@ -148,9 +141,7 @@ public class MinerAI : MonoBehaviour, IMiner
 
     private Vector3 GetSearchPosition()
     {
-        //return _truck.transform.position + 
-        //    Utils.GetRandomDir() * UnityEngine.Random.Range(roamingDistanceMin, roamingDistanceMax);
-        return transform.position + 
+        return _truck.transform.position + 
             Utils.GetRandomDir() * UnityEngine.Random.Range(roamingDistanceMin, roamingDistanceMax);
     }
 }
