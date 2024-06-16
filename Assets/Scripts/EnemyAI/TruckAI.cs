@@ -5,41 +5,67 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(NavMeshAgent))]
+[RequireComponent(typeof(Rigidbody2D), typeof(NavMeshAgent), typeof(Enemy))]
 public class TruckAI : MonoBehaviour
 {
+    //[SerializeField] private GemList _gemList;
+
+    [Header("Miner Settings")]
+    [SerializeField] private List<GameObject> _miners;
+    [SerializeField] private GameObject _minerPrefab;
+    [SerializeField] private int _minMinersCount;
+    [SerializeField] private int _maxMinersCount;
+
+    [Header("Roaming Settings")]
+    [SerializeField] private float _roamingDistanceMin;
+    [SerializeField] private float _roamingDistanceMax;
+    [SerializeField] private float _roamingTimerMax = 4f;
+    [SerializeField] private float _roamingTime = 0;
+
     [SerializeField] private int GemCount = 0;
     [SerializeField] private TruckState _state;
 
     [SerializeField] private float _turningSpeed = 5f;
-
-    [Header("Roaming Settings")]
-    [SerializeField] private float roamingDistanceMin;
-    [SerializeField] private float roamingDistanceMax;
-    [SerializeField] private float _roamingTimerMax = 4f;
-    [SerializeField] private float _roamingTime = 0;
-
+    private Enemy _enemy;
     private NavMeshAgent _agent;
     private IControllable _controllable;
 
     private Vector3 _posToRoam;
 
+
     internal void GiveGem()
     {
         GemCount++;
+        _enemy.Gem++;
     }
 
     private void Awake()
     {
+        _enemy = GetComponent<Enemy>();
         _agent = GetComponent<NavMeshAgent>();
+        var truckComponent = GetComponent<TruckAI>();
         _agent.updateUpAxis = false;
         _agent.updateRotation = false;
         _state = TruckState.Idle;
         _controllable = GetComponent<IControllable>();
+
+        for(int i = 0; i < UnityEngine.Random.Range(_minMinersCount, _maxMinersCount); ++i)
+        {
+            var obj = Instantiate(_minerPrefab, transform.position +
+                Utils.GetRandomDir() * UnityEngine.Random.Range(5f, 10f),
+                Quaternion.identity);
+            var miner = obj.GetComponent<MinerAI>(); 
+            miner.enabled = true;
+            //miner.GemList = GemList;
+            miner.Truck = truckComponent;
+            _miners.Add(obj);
+        }
     }
 
     private void Update()
     {
+        if (PlayerPosition.GetDistance(transform.position) > PlayerPosition.SleepDistance)
+            return;
         switch (_state)
         {
             default:
@@ -82,6 +108,6 @@ public class TruckAI : MonoBehaviour
     private Vector3 GetSearchPosition()
     {
         return transform.position +
-            Utils.GetRandomDir() * UnityEngine.Random.Range(roamingDistanceMin, roamingDistanceMax);
+            Utils.GetRandomDir() * UnityEngine.Random.Range(_roamingDistanceMin, _roamingDistanceMax);
     }
 }

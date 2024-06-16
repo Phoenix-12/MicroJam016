@@ -43,16 +43,20 @@ public class PlayerInput : MonoBehaviour
 
     private void ShootOnPerformed(InputAction.CallbackContext context)
     {
-        _controllable.Shoot();
+        //_controllable.Shoot();
     }
 
     private void ReadMovement()
     {
+        if (_gameInput.Gameplay.Shoot.IsPressed())
+        {
+            _controllable.Shoot();
+        }
         //Debug.Log(_gameInput.Gameplay.Aim.ReadValue<Vector2>());
         var moveDirection = _gameInput.Gameplay.Movement.ReadValue<Vector2>();
-        var turnDirection = _gameInput.Gameplay.Turn.ReadValue<float>();
+        //var turnDirection = _gameInput.Gameplay.Turn.ReadValue<float>();
         _direction = new Vector2(moveDirection.x, moveDirection.y);
-        _controllable.Turn(turnDirection);
+        //_controllable.Turn(turnDirection);
         //Debug.Log(_direction);
         _controllable.Move(_direction);
     }

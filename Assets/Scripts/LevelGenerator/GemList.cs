@@ -3,12 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GemList : MonoBehaviour
-{
-    [SerializeField] private List<Gem> _gems;
 
-    internal Gem GetNearestGem(Vector3 position)
+/*public static class DataHolder
+{
+    private static GameObject prefabName;
+
+    public static GameObject Prefab
     {
+        get
+        {
+            return prefabName;
+        }
+        set
+        {
+            prefabName = value;
+        }
+    }
+}*/
+
+public static class GemList
+{
+    private static List<Gem> _gems = new List<Gem>();
+    
+    public static void AddGem(Gem gem)
+    {
+        _gems.Add(gem);
+    }
+
+    public static Gem GetNearestGem(Vector3 position)
+    {
+        //Debug.Log(_gems.Count);
         Gem nearest = null;
         float min_dist = 10000f;
         foreach (var gem in _gems)

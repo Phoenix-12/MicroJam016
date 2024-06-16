@@ -11,5 +11,6 @@ enum MinerState
     GoToGem,
     Pickup,
     SearchGem,
-    ReturnGem
+    ReturnGem,
+    Roaming
 }

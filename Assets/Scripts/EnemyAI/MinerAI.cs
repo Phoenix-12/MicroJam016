@@ -6,22 +6,21 @@ using UnityEngine;
 using UnityEngine.AI;
 using SpaceUtils.Utils;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(NavMeshAgent))]
+[RequireComponent(typeof(Rigidbody2D), typeof(NavMeshAgent), typeof(Enemy))]
 public class MinerAI : MonoBehaviour, IMiner
 {
-    
+    //[SerializeField] public GemList GemList;
+    [SerializeField] public TruckAI Truck;
 
     [SerializeField] private bool _haveGem = false;
     [SerializeField] private MinerState _state;
     
-    [SerializeField] private GemList _gemList;
-    [SerializeField] private TruckAI _truck;
 
     [SerializeField] private float _seeDist = 10000f;
     [SerializeField] private float _pickupDist;
     [SerializeField] private float _giveDist = 10f;
-    [SerializeField] private float roamingDistanceMin;
-    [SerializeField] private float roamingDistanceMax;
+    [SerializeField] private float _roamingDistanceMin;
+    [SerializeField] private float _roamingDistanceMax;
 
     [SerializeField] private float _searchTimerMax = 4f;
     
@@ -32,20 +31,23 @@ public class MinerAI : MonoBehaviour, IMiner
     private IControllable _controllable;
 
     private Vector3 _posToRoam;
-    
+    private Enemy _enemy;
 
-    private void Awake()
+    private void Start()
     {
+        _enemy = GetComponent<Enemy>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateUpAxis = false;
         _agent.updateRotation = false;
-        _truckTransform = _truck.transform;
+        _truckTransform = Truck.transform;
         _state = MinerState.Idle;
         _controllable = GetComponent<IControllable>();
     }
 
     private void Update()
     {
+        if (PlayerPosition.GetDistance(transform.position) > PlayerPosition.SleepDistance)
+            return;
         switch (_state)
         {
             default:
@@ -58,14 +60,8 @@ public class MinerAI : MonoBehaviour, IMiner
                     _state = MinerState.SeeGem;
                 else
                 {
-                    _searchTime -= Time.deltaTime;
-                    if (_searchTime < 0)
-                    {
-                        _posToRoam = GetSearchPosition();
-                        GoToPosition(_posToRoam);
-                        _searchTime = _searchTimerMax;
-                    }
-                    RotateToVec(_posToRoam);
+                    GoToRoamPosition();
+                    
                 }
                 break;
 
@@ -80,7 +76,7 @@ public class MinerAI : MonoBehaviour, IMiner
             case MinerState.GoToGem:
                 if (IsSeeGem())
                 {
-                    _currentGem = _gemList.GetNearestGem(transform.position);
+                    _currentGem = GemList.GetNearestGem(transform.position);
                     if (Vector3.Distance(_currentGem.transform.position, transform.position) < _pickupDist)
                     {
                         _state = MinerState.Pickup;
@@ -95,25 +91,53 @@ public class MinerAI : MonoBehaviour, IMiner
                 break;
 
             case MinerState.ReturnGem:
-                if (Vector3.Distance(_truckTransform.position, transform.position) < _giveDist)
+                if (Truck.isActiveAndEnabled)
                 {
-                    _truck.GiveGem();
-                    _haveGem = false;
-                    _state = MinerState.SearchGem;
+                    if (Vector3.Distance(_truckTransform.position, transform.position) < _giveDist)
+                    {
+                        Truck.GiveGem();
+                        _enemy.Gem--;
+                        _haveGem = false;
+                        _state = MinerState.SearchGem;
+                    }
+                    else
+                    {
+                        GoToTruck();
+                    }
+                    break;
                 }
                 else
                 {
-                    GoToTruck();
+                    _state = MinerState.Roaming;
                 }
                 break;
+
+            case MinerState.Roaming:
+                GoToRoamPosition();
+                break;
+                
 
             case MinerState.Pickup:
                 _currentGem.Pickup();
                 _haveGem = true;
+                _enemy.Gem++;
                 _state = MinerState.ReturnGem;
                 break;
         }
     }
+
+    private void GoToRoamPosition()
+    {
+        _searchTime -= Time.deltaTime;
+        if (_searchTime < 0)
+        {
+            _posToRoam = GetSearchPosition();
+            GoToPosition(_posToRoam);
+            _searchTime = _searchTimerMax;
+        }
+        RotateToVec(_posToRoam);
+    }
+
     private void GoToPosition(Vector3 pos)
     {
         _agent.SetDestination(pos);
@@ -127,7 +151,8 @@ public class MinerAI : MonoBehaviour, IMiner
 
     public bool IsSeeGem()
     {
-        var nearestGem = _gemList.GetNearestGem(transform.position);
+        //Debug.Log(transform.position);
+        var nearestGem = GemList.GetNearestGem(transform.position);
         if (nearestGem != null)
         {
             var distToNearestGem = Vector3.Distance(nearestGem.transform.position, transform.position);
@@ -141,7 +166,7 @@ public class MinerAI : MonoBehaviour, IMiner
 
     private Vector3 GetSearchPosition()
     {
-        return _truck.transform.position + 
-            Utils.GetRandomDir() * UnityEngine.Random.Range(roamingDistanceMin, roamingDistanceMax);
+        return Truck.transform.position + 
+            Utils.GetRandomDir() * UnityEngine.Random.Range(_roamingDistanceMin, _roamingDistanceMax);
     }
 }
