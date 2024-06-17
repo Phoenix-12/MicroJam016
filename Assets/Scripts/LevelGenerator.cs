@@ -42,8 +42,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void Awake()
     {
-        if (_player == null)
-            _player = GameObject.FindWithTag("Player");
+        _player = GameObject.FindWithTag("Player");
         if (_generator == null)
             _generator = GameObject.Find("GENERATOR");
         PlayerPosition.Transform = _player.transform;
@@ -88,6 +87,7 @@ public class LevelGenerator : MonoBehaviour
                 //met.GetComponent<Meteora>();
             }
         }
+        navi.Targets = new List<GameObject>();
         navi.Targets = trucks;
 
         var radius = (_maxMeteorRadius + _maxTruckRadius);

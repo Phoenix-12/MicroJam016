@@ -33,7 +33,7 @@ public class Navigator : MonoBehaviour
     {
         foreach (var bigArrow in _bigArrows)
         {
-            bigArrow.transform.position = transform.position + (_gate.transform.position - transform.position).normalized;
+            bigArrow.transform.position = transform.position + (_gate.transform.position - transform.position).normalized * 1.5f;
             bigArrow.transform.up = (_gate.transform.position - transform.position).normalized;
         }
 
@@ -44,6 +44,7 @@ public class Navigator : MonoBehaviour
             {
                 arrow.transform.position = transform.position + (Targets[i].transform.position - transform.position).normalized;
                 arrow.transform.up = (Targets[i].transform.position - transform.position).normalized;
+                arrow.SetActive(true);
                 
             }
             else
