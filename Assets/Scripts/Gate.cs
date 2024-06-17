@@ -23,7 +23,7 @@ public class Gate : MonoBehaviour
     {
         if(collision.TryGetComponent<Player>(out Player player))
         {
-            if (player.GemCounter > player.NeedGemCount)
+            if (player.GemCounter >= player.NeedGemCount)
             {
                 if(collision.TryGetComponent<PlayerInput>(out PlayerInput playerInput)){
                     playerInput.enabled = false;
