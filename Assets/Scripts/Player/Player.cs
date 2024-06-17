@@ -122,6 +122,11 @@ public class Player : MonoBehaviour, IPlayerControllable
         }
     }
 
+    public void Dodge()
+    {
+        Debug.Log("Dodge");
+    }
+
 
     internal void PlaceOnSpawn()
     {

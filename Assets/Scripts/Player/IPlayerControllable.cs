@@ -10,4 +10,5 @@ internal interface IPlayerControllable
 {
     void Move(Vector2 direction);
     void Shoot();
+    void Dodge();
 }

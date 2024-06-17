@@ -9,7 +9,7 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private IPlayerControllable _controllable;
     private GameInput _gameInput;
-    private Vector2 _direction;
+    private Vector2 _directionMove;
 
     private void Awake()
     {
@@ -24,6 +24,7 @@ public class PlayerInput : MonoBehaviour
     {
         _gameInput.Enable();
         _gameInput.Gameplay.Shoot.performed += ShootOnPerformed;
+        _gameInput.Gameplay.Dodge.performed += DodgeOnPerformed;
 
     }
 
@@ -33,6 +34,7 @@ public class PlayerInput : MonoBehaviour
     {
         _gameInput.Disable();
         _gameInput.Gameplay.Shoot.performed -= ShootOnPerformed;
+        _gameInput.Gameplay.Dodge.performed -= DodgeOnPerformed;
     }
 
 
@@ -45,6 +47,11 @@ public class PlayerInput : MonoBehaviour
     {
         //_controllable.Shoot();
     }
+    
+    private void DodgeOnPerformed(InputAction.CallbackContext context)
+    {
+        _controllable.Dodge();
+    }
 
     private void ReadMovement()
     {
@@ -55,10 +62,11 @@ public class PlayerInput : MonoBehaviour
         //Debug.Log(_gameInput.Gameplay.Aim.ReadValue<Vector2>());
         var moveDirection = _gameInput.Gameplay.Movement.ReadValue<Vector2>();
         //var turnDirection = _gameInput.Gameplay.Turn.ReadValue<float>();
-        _direction = new Vector2(moveDirection.x, moveDirection.y);
+        _directionMove = new Vector2(moveDirection.x, moveDirection.y);
+        
         //_controllable.Turn(turnDirection);
         //Debug.Log(_direction);
-        _controllable.Move(_direction);
+        _controllable.Move(_directionMove);
     }
 }
 

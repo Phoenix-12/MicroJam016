@@ -4019,6 +4019,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3413957934906299993, guid: 15654e78e93b42141aa1a59dbd0982f7, type: 3}
+      propertyPath: NeedGemCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413957934906299993, guid: 15654e78e93b42141aa1a59dbd0982f7, type: 3}
       propertyPath: _minigemPrefab
       value: 
       objectReference: {fileID: 9157528469160569843, guid: 064cfb0baa4eab74d886c68368a37580, type: 3}

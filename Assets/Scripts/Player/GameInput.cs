@@ -53,6 +53,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""399991b0-dc0f-4a39-8d53-1fecb5c8ca10"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -143,6 +152,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9400b9b-f569-48c4-9f9d-d6644dc160d0"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -182,6 +202,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
+        m_Gameplay_Dodge = m_Gameplay.FindAction("Dodge", throwIfNotFound: true);
         // Ui
         m_Ui = asset.FindActionMap("Ui", throwIfNotFound: true);
         m_Ui_Newaction = m_Ui.FindAction("New action", throwIfNotFound: true);
@@ -249,6 +270,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_Shoot;
     private readonly InputAction m_Gameplay_Aim;
+    private readonly InputAction m_Gameplay_Dodge;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -256,6 +278,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
+        public InputAction @Dodge => m_Wrapper.m_Gameplay_Dodge;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -274,6 +297,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @Dodge.started += instance.OnDodge;
+            @Dodge.performed += instance.OnDodge;
+            @Dodge.canceled += instance.OnDodge;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -287,6 +313,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @Dodge.started -= instance.OnDodge;
+            @Dodge.performed -= instance.OnDodge;
+            @Dodge.canceled -= instance.OnDodge;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -355,6 +384,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
     }
     public interface IUiActions
     {
