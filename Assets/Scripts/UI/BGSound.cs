@@ -19,7 +19,11 @@ public class BGSound : MonoBehaviour
         _text.enabled = false;
     }
 
-    private void Awake() => _slider = GetComponent<Slider>();
+    private void Awake()
+    {
+        _slider = GetComponent<Slider>();
+        SetSound(); 
+    }
 
     public void SetSound() 
     {

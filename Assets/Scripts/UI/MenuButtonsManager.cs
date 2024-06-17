@@ -15,7 +15,6 @@ public class MenuButtonsManager : MonoBehaviour
 
     private Animator _animator;
     private AudioSource _audioSourceMenu;
-    
 
     private void Awake()
     {
