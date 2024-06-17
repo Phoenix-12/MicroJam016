@@ -7,8 +7,11 @@ public class Gem : MonoBehaviour
     public bool Collected = false;
     public void Pickup()
     {
-        Debug.Log("Gem Pickuped!");
         Collected = true;
         gameObject.SetActive(false);
+    }
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

@@ -14,12 +14,14 @@ public class Enemy : MonoBehaviour
 
     private List<GameObject> _gems = new List<GameObject>();
     private int _gemRendered;
+    [SerializeField] private GameObject _boomEffect;
 
     public void Hit()
     {
         Health -= 1;
         if (Health <= 0)
         {
+            Destroy(Instantiate(_boomEffect, transform.position, Quaternion.identity), 0.3f);
             Health = 0;
             if (Gem > 0)
             {

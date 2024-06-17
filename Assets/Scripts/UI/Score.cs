@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    [SerializeField] private TMPro.TextMeshPro _scoreCounter;
+    [SerializeField] private TMPro.TMP_Text _scoreCounter;
 
-    private void UpdateScore(int score) => _scoreCounter.text = score.ToString(); 
+    public void UpdateScore(int score) => _scoreCounter.text = score.ToString(); 
 }

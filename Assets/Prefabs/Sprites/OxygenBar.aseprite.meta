@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d7d0e76f1cbd2564e83b75c1652e09b8
+guid: 732a9794829d5a941ae06552e71c8414
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: truck
+  - name: OxygenBar
     originalName: 
-    pivot: {x: 0.5, y: -0.07017544}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 50
-      height: 57
-    spriteID: 51d6840f0d6fe6041bd2daa6b6e06509
+      width: 118
+      height: 29
+    spriteID: 939f616237b5f904db0edc8890537115
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,25 +144,25 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 157556087
-    name: truck
+    guid: -1301251869
+    name: OxygenBar
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: truck
+    - name: OxygenBar
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 7
-        y: 4
-        width: 50
-        height: 57
-      spriteId: 51d6840f0d6fe6041bd2daa6b6e06509
+        x: 0
+        y: 0
+        width: 118
+        height: 29
+      spriteId: 939f616237b5f904db0edc8890537115
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 64, y: 64}
+  canvasSize: {x: 118, y: 29}

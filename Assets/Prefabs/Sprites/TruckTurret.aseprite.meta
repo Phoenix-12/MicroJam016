@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d7d0e76f1cbd2564e83b75c1652e09b8
+guid: de071d229ff827d489cce6dbcd5d2e7b
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: truck
+  - name: TruckTurret
     originalName: 
-    pivot: {x: 0.5, y: -0.07017544}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 50
-      height: 57
-    spriteID: 51d6840f0d6fe6041bd2daa6b6e06509
+      width: 13
+      height: 16
+    spriteID: 459722cc6d18d8b499e108dae3db58dc
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,25 +144,25 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 157556087
-    name: truck
+    guid: 2082332131
+    name: TruckTurret
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: truck
+    - name: TruckTurret
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 7
-        y: 4
-        width: 50
-        height: 57
-      spriteId: 51d6840f0d6fe6041bd2daa6b6e06509
+        x: 0
+        y: 0
+        width: 13
+        height: 16
+      spriteId: 459722cc6d18d8b499e108dae3db58dc
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 64, y: 64}
+  canvasSize: {x: 13, y: 16}

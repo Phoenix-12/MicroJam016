@@ -5,9 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public static class PlayerPosition
+public class PlayerPosition
 {
     public static Transform Transform;
+
+    public static void Start()
+    {
+        
+    }
+
     public static float SleepDistance = 20f;
 
     public static float GetDistance(Vector3 pos)

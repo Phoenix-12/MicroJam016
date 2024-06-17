@@ -44,6 +44,10 @@ GameObject:
   - component: {fileID: 2429099668578181359}
   - component: {fileID: 3413957934906299993}
   - component: {fileID: 7684856502117651878}
+  - component: {fileID: 5020935622159399740}
+  - component: {fileID: 5407178150372808035}
+  - component: {fileID: 5625431735044621416}
+  - component: {fileID: 5764372152151729467}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -111,7 +115,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6922770563638850333}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df9de675433a5fa4f9c26d1d53fc59da, type: 3}
   m_Name: 
@@ -128,8 +132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3394eec80d51b489b4f074d2a54f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _oxygen: 100
+  _maxOxygen: 30
+  _oxygen: 1
   _gemCounter: 0
+  _needGemCount: 20
+  _maxHealth: 10
+  _health: 0
   _rotateSpeed: 100
   _moveVelocity: 4
   _oxygenBuff: 10
@@ -137,6 +145,11 @@ MonoBehaviour:
   _bulletSpawnLeft: {fileID: 2701325927226158425}
   _bulletSpawnRight: {fileID: 4266669880619112316}
   _spawnPointTransform: {fileID: 0}
+  _levelGenerator: {fileID: 0}
+  _levelGeneratorPrefab: {fileID: 7779849659507092942, guid: 9254b543950aeee40ab3b523b5d2f678, type: 3}
+  _barManager: {fileID: 5407178150372808035}
+  _scoreView: {fileID: 5625431735044621416}
+  _gemsCounterView: {fileID: 0}
 --- !u!50 &7684856502117651878
 Rigidbody2D:
   serializedVersion: 4
@@ -164,6 +177,145 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5020935622159399740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922770563638850333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa842c4fac347d447a7a7d833b7560c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Targets: []
+  _arrowPrefab: {fileID: 197171687581482181, guid: b60d05eb8dfe74f4da9cdc47e00ff006, type: 3}
+  _bigArrow: {fileID: 3288836034395108924, guid: 90dd8cb5552df3f44b6a9c27ec2b7730, type: 3}
+  _gate: {fileID: 0}
+--- !u!114 &5407178150372808035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922770563638850333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298e8524bcaae114086a97441a1187f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _oxygenBar: {fileID: 0}
+  _healthBar: {fileID: 0}
+--- !u!114 &5625431735044621416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922770563638850333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e347b2356e89b134cb719a565bf71374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreCounter: {fileID: 0}
+--- !u!82 &5764372152151729467
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922770563638850333}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: b77385b16f0d3054fae1ab44a3ec1777, type: 2}
+  m_audioClip: {fileID: 8300000, guid: f78940b623354874c990d82cae0e0338, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1.78
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7369007786254571288
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +358,7 @@ GameObject:
   - component: {fileID: 7762961397043188598}
   - component: {fileID: 2491197784950594708}
   m_Layer: 3
-  m_Name: Player
+  m_Name: Player Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -160,6 +160,7 @@ MonoBehaviour:
   _minigemPrefab: {fileID: 9157528469160569843, guid: 064cfb0baa4eab74d886c68368a37580, type: 3}
   _oxygenPrefab: {fileID: 9045343239919877041, guid: 3f945809615e77c4eb66e5db297667bc, type: 3}
   _gemHolderPosition: {fileID: 6694646097933486315}
+  _boomEffect: {fileID: 1805942996312705434, guid: c8ea31527b3a1694d879367b961d5f57, type: 3}
 --- !u!1 &1857048573056204498
 GameObject:
   m_ObjectHideFlags: 0

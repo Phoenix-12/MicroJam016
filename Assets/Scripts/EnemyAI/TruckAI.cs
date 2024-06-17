@@ -11,7 +11,7 @@ public class TruckAI : MonoBehaviour
     //[SerializeField] private GemList _gemList;
 
     [Header("Miner Settings")]
-    [SerializeField] private List<GameObject> _miners;
+    [SerializeField] public List<GameObject> Miners;
     [SerializeField] private GameObject _minerPrefab;
     [SerializeField] private int _minMinersCount;
     [SerializeField] private int _maxMinersCount;
@@ -58,7 +58,7 @@ public class TruckAI : MonoBehaviour
             miner.enabled = true;
             //miner.GemList = GemList;
             miner.Truck = truckComponent;
-            _miners.Add(obj);
+            Miners.Add(obj);
         }
     }
 

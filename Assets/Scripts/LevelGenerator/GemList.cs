@@ -21,10 +21,15 @@ using UnityEngine;
     }
 }*/
 
-public static class GemList
+public class GemList
 {
     private static List<Gem> _gems = new List<Gem>();
-    
+
+    public static void Start()
+    {
+        _gems.Clear();
+    }
+
     public static void AddGem(Gem gem)
     {
         _gems.Add(gem);

@@ -3,12 +3,25 @@ using UnityEngine;
 
 public class Navigator : MonoBehaviour
 {
+    public List<GameObject> Targets = new List<GameObject>();
+
     [SerializeField] private GameObject _arrowPrefab;
     [SerializeField] private GameObject _bigArrow;
     [SerializeField] private GameObject _gate;
     private List<GameObject> _bigArrows = new List<GameObject>();
     private List<GameObject> _minArrows = new List<GameObject>();
-    [SerializeField] private List<GameObject> _targets = new List<GameObject>(); 
+
+    public void HideArrows()
+    {
+        foreach (var arrow in _bigArrows)
+        {
+            arrow.SetActive(false);
+        }
+        foreach (var arrow in _minArrows)
+        {
+            arrow.SetActive(false);
+        }
+    }
 
     private void Start()
     {
@@ -27,10 +40,10 @@ public class Navigator : MonoBehaviour
         var i = 0;
         foreach (var arrow in _minArrows)
         {
-            if (_targets[i].active)
+            if (Targets[i].active)
             {
-                arrow.transform.position = transform.position + (_targets[i].transform.position - transform.position).normalized;
-                arrow.transform.up = (_targets[i].transform.position - transform.position).normalized;
+                arrow.transform.position = transform.position + (Targets[i].transform.position - transform.position).normalized;
+                arrow.transform.up = (Targets[i].transform.position - transform.position).normalized;
                 
             }
             else
@@ -47,9 +60,9 @@ public class Navigator : MonoBehaviour
         var bigArrow = Instantiate(_bigArrow, bigArrowPosition, Quaternion.identity);
         _bigArrows.Add(bigArrow);
 
-        for(int i = 0; i < _targets.Count; i++)
+        for(int i = 0; i < Targets.Count; i++)
         {
-            Vector3 minArrowPosition = transform.position +(_targets[i].transform.position - transform.position).normalized;
+            Vector3 minArrowPosition = transform.position +(Targets[i].transform.position - transform.position).normalized;
             var minArrow = Instantiate(_arrowPrefab, minArrowPosition, Quaternion.identity);
             _minArrows.Add(minArrow);
         }
