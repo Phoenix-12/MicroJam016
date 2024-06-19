@@ -13,6 +13,7 @@ public class TruckBullet : MonoBehaviour
     [SerializeField] private float _lifetime = 7f;
     
     private Rigidbody2D _rb;
+    private RocketEffector _effector;
     [SerializeField] private float _boomRadius;
     [SerializeField] private GameObject _boomEffect;
 

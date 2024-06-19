@@ -204,6 +204,7 @@ public class Player : MonoBehaviour, IPlayerControllable
 
     public void RestartLevel()
     {
+        _rb.isKinematic = false;
         _health = _maxHealth;
         _oxygen = _maxOxygen;
         _barManager.SetHealthBar(_health);
@@ -222,14 +223,7 @@ public class Player : MonoBehaviour, IPlayerControllable
         }
         
         transform.position = Vector3.zero;
-
-        //SceneManager.UnloadScene(SceneManager.GetActiveScene().buildIndex);
         Instantiate(_levelGeneratorPrefab, transform.position, Quaternion.identity);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Additive);
-        //SceneManager.UnloadScene(SceneManager.GetActiveScene().buildIndex);
-        //SceneManager.LoadScene("SampleScene");
     }
 
 }

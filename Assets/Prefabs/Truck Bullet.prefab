@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2842271954594045216}
   - component: {fileID: 6058133330650714545}
   - component: {fileID: 2162022018595835503}
+  - component: {fileID: -637727299061625042}
   m_Layer: 0
   m_Name: Truck Bullet
   m_TagString: Untagged
@@ -166,3 +167,17 @@ MonoBehaviour:
   _lifetime: 7
   _boomRadius: 2
   _boomEffect: {fileID: 1805942996312705434, guid: c8ea31527b3a1694d879367b961d5f57, type: 3}
+--- !u!114 &-637727299061625042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3658268256378893077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2a93cdc518bf34ca01ce6c83a6696a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerExplosionMax: 0
+  _spriteRocket: {fileID: 0}

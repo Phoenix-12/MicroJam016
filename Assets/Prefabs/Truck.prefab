@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7b9d3671de09e4ca02e1c4bf0298c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _miners: []
+  Miners: []
   _minerPrefab: {fileID: 2923232799612589, guid: f37658a7276025647beb6b558d00f2a2, type: 3}
   _minMinersCount: 2
   _maxMinersCount: 3

@@ -13,15 +13,9 @@ public class WinScreen : MonoBehaviour
 
     public void Restart()
     {
-      //  if (_canvas.isActiveAndEnabled)
-       // {
-          //  if (Input.GetKeyDown(KeyCode.KeypadEnter))
-          //  {
-                _player.RestartLevel();
-                _winCanvas.enabled=false;
-                _input.enabled = true;
-          //  }
-       // }
+        _player.RestartLevel();
+        _winCanvas.enabled=false;
+        _input.enabled = true;
     }
 
     private void Awake()

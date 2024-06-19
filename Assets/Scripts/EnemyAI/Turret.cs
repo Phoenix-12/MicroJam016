@@ -34,6 +34,9 @@ public class Turret : MonoBehaviour
     {
         var bullet = Instantiate(_bulletPrefab, _bulletSpawn.position, _bulletSpawn.rotation);
         var component = bullet.GetComponent<TruckBullet>();
+        
         component.Boomtime = PlayerPosition.GetDistance(transform.position) / component.Speed;
+        //bullet.GetComponent<RocketEffector>().TimerExplosionMax = component.Boomtime;
+        bullet.GetComponent<RocketEffector>().TimerExplosionMax = 1f;
     }
 }
