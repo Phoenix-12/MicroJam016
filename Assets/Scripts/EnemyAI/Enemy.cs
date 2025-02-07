@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public event Action<int> HealthChanged;
+
     public int Health;
     public int Gem;
 
@@ -37,6 +40,7 @@ public class Enemy : MonoBehaviour
 
             gameObject.SetActive(false);
         }
+        HealthChanged?.Invoke(Health);
     }
 
     private void FixedUpdate()

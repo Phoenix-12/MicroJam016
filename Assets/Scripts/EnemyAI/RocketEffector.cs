@@ -28,7 +28,7 @@ public class RocketEffector : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log($"{_timerExplosion} - {TimerExplosionMax}");
+        //Debug.Log($"{_timerExplosion} - {TimerExplosionMax}");
         if (_timerExplosion < TimerExplosionMax / 2)
         {
             _spriteRocket.color = Color.red;

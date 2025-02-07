@@ -76,7 +76,7 @@ public class MinerAI : MonoBehaviour, IMiner
             case MinerState.GoToGem:
                 if (IsSeeGem())
                 {
-                    _currentGem = GemList.GetNearestGem(transform.position);
+                    _currentGem = GemList.getInstance().GetNearestGem(transform.position);
                     if (Vector3.Distance(_currentGem.transform.position, transform.position) < _pickupDist)
                     {
                         _state = MinerState.Pickup;
@@ -152,7 +152,7 @@ public class MinerAI : MonoBehaviour, IMiner
     public bool IsSeeGem()
     {
         //Debug.Log(transform.position);
-        var nearestGem = GemList.GetNearestGem(transform.position);
+        var nearestGem = GemList.getInstance().GetNearestGem(transform.position);
         if (nearestGem != null)
         {
             var distToNearestGem = Vector3.Distance(nearestGem.transform.position, transform.position);

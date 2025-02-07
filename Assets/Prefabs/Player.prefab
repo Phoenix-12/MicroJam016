@@ -132,12 +132,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3394eec80d51b489b4f074d2a54f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GemCounter: 0
+  NeedGemCount: 25
+  _minigemPrefab: {fileID: 0}
+  _gemHolderPosition: {fileID: 0}
+  MobileToggle: {fileID: 0}
+  _mobileCanvas: {fileID: 0}
   _maxOxygen: 30
   _oxygen: 1
-  _gemCounter: 0
-  _needGemCount: 20
-  _maxHealth: 10
+  _maxHealth: 5
   _health: 0
+  _reloadTimeMax: 0.5
   _rotateSpeed: 100
   _moveVelocity: 4
   _oxygenBuff: 10
@@ -145,11 +150,13 @@ MonoBehaviour:
   _bulletSpawnLeft: {fileID: 2701325927226158425}
   _bulletSpawnRight: {fileID: 4266669880619112316}
   _spawnPointTransform: {fileID: 0}
+  _shootEffect: {fileID: 0}
   _levelGenerator: {fileID: 0}
   _levelGeneratorPrefab: {fileID: 7779849659507092942, guid: 9254b543950aeee40ab3b523b5d2f678, type: 3}
   _barManager: {fileID: 5407178150372808035}
   _scoreView: {fileID: 5625431735044621416}
   _gemsCounterView: {fileID: 0}
+  _navigator: {fileID: 0}
 --- !u!50 &7684856502117651878
 Rigidbody2D:
   serializedVersion: 4

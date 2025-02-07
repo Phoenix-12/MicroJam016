@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -23,19 +24,36 @@ using UnityEngine;
 
 public class GemList
 {
+    private static GemList instance;
+
+    private GemList()
+    { 
+    
+    }
+
+    public static GemList getInstance()
+    {
+        if (instance == null)
+            instance = new GemList();
+        return instance;
+    }
+
+
+
+
     private static List<Gem> _gems = new List<Gem>();
 
-    public static void Start()
+    public void Initialize()
     {
         _gems.Clear();
     }
 
-    public static void AddGem(Gem gem)
+    public void AddGem(Gem gem)
     {
         _gems.Add(gem);
     }
 
-    public static Gem GetNearestGem(Vector3 position)
+    public Gem GetNearestGem(Vector3 position)
     {
         //Debug.Log(_gems.Count);
         Gem nearest = null;

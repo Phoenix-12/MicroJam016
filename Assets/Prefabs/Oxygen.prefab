@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -6725910049555049799}
   - component: {fileID: -4697230476054192863}
   - component: {fileID: 520032687488322538}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Oxygen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,8 +149,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

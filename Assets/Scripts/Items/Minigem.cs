@@ -25,6 +25,8 @@ public class Minigem : MonoBehaviour
         var x = (R - r) * Mathf.Cos(fi) + h * Mathf.Cos(((R - r) / r) * fi);
         var y = (R - r) * Mathf.Sin(fi) - h * Mathf.Sin(((R - r) / r) * fi);
         transform.position = Target.position + new Vector3(x, y, 0);
+
+        transform.Rotate(0, 0, 1);
     }
 
     public bool TryPickup()

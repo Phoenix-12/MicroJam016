@@ -17,7 +17,7 @@ public class Turret : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.up = _playerTransform.position - transform.position + SpaceUtils.Utils.Utils.GetRandomDir() * 2f;
+        transform.up = _playerTransform.position - transform.position;// + SpaceUtils.Utils.Utils.GetRandomDir() * 2f;
         if (_reloadTimer < 0.0f)
         {
             

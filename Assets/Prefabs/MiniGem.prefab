@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4162080283564954502}
   - component: {fileID: 7404565502778981487}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MiniGem Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1267324424848747016, guid: fef3ec0ff42693a4ba96fa8cd351b266, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 9118478119068931220}
   - component: {fileID: 2840130696625375837}
   - component: {fileID: 1536210045433008312}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MiniGem
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -66,7 +66,7 @@ public class TruckBullet : MonoBehaviour
         }
         else
         {
-            //Destroy(gameObject);
+            Boom();
         }
     }
 }

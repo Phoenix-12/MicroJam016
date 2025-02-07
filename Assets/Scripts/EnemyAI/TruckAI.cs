@@ -22,7 +22,6 @@ public class TruckAI : MonoBehaviour
     [SerializeField] private float _roamingTimerMax = 4f;
     [SerializeField] private float _roamingTime = 0;
 
-    [SerializeField] private int GemCount = 0;
     [SerializeField] private TruckState _state;
 
     [SerializeField] private float _turningSpeed = 5f;
@@ -35,7 +34,6 @@ public class TruckAI : MonoBehaviour
 
     internal void GiveGem()
     {
-        GemCount++;
         _enemy.Gem++;
     }
 

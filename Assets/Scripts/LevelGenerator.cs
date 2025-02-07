@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -33,8 +34,9 @@ public class LevelGenerator : MonoBehaviour
 
     public void RestartLevel()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         //_all.SetActive(false);
-        GemList.Start();
+        GemList.getInstance().Initialize();
         gameObject.SetActive(false);
         //Instantiate(_generator, Vector3.zero, Quaternion.identity);
         //Destroy(gameObject);
@@ -46,7 +48,7 @@ public class LevelGenerator : MonoBehaviour
         if (_generator == null)
             _generator = GameObject.Find("GENERATOR");
         PlayerPosition.Transform = _player.transform;
-        GemList.Start();
+        GemList.getInstance().Initialize();
         StartLevel();
     }
 
@@ -83,6 +85,8 @@ public class LevelGenerator : MonoBehaviour
                 maxM += stepM;
                 Vector3 meteorPos = new Vector3(Mathf.Cos(rotM), Mathf.Sin(rotM), 0) * distM;
                 var met = Instantiate(_meteorPref, truckPos + meteorPos, Quaternion.identity, transform.transform);
+                var startScale = met.transform.localScale;
+                met.transform.localScale = startScale * UnityEngine.Random.Range(0.5f, startScale.x);
                 _allGamoObjects.Add(met);
                 //met.GetComponent<Meteora>();
             }

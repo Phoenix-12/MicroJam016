@@ -20,7 +20,6 @@ public class Meteora : MonoBehaviour
 
     private Rigidbody2D _rb;
 
-
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -32,7 +31,7 @@ public class Meteora : MonoBehaviour
             {
                 var gem = Instantiate(_gemPrefab, gemTransform, false);
                 countGemTmp--;
-                GemList.AddGem(gem.GetComponent<Gem>());
+                GemList.getInstance().AddGem(gem.GetComponent<Gem>());
             }
             else break;
         }

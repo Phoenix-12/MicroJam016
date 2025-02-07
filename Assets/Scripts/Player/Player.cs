@@ -5,12 +5,14 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour, IPlayerControllable 
+public class Player : MonoBehaviour, IPlayerControllable
 {
     public event Action GameRestarted;
+    public event Action<bool> InputChanged;
+
     //public event Action BulletHited;
     public int GemCounter = 0;
     public int NeedGemCount = 20;
@@ -22,7 +24,10 @@ public class Player : MonoBehaviour, IPlayerControllable
     private List<GameObject> _gems = new List<GameObject>();
     private int _gemRendered;
 
-
+    [Header("Mobile")]
+    [SerializeField] public Toggle MobileToggle;
+    [SerializeField] private Canvas _mobileCanvas;
+    
 
     [Header("IN GAME STATS")]
 
@@ -33,6 +38,8 @@ public class Player : MonoBehaviour, IPlayerControllable
     [SerializeField] private int _health = 0;
 
     [Header("Properties")]
+    [SerializeField] private float _reloadTimeMax;
+    private float _reloadTimer = 0f;
     [SerializeField] private float _rotateSpeed;
     [SerializeField] private float _moveVelocity; 
     [SerializeField] private float _oxygenBuff = 10f;
@@ -42,6 +49,7 @@ public class Player : MonoBehaviour, IPlayerControllable
     [SerializeField] private Transform _bulletSpawnLeft;
     [SerializeField] private Transform _bulletSpawnRight;
     [SerializeField] private Transform _spawnPointTransform;
+    [SerializeField] private ParticleSystem _shootEffect;
 
     [Header("Other")]
     [SerializeField] private LevelGenerator _levelGenerator;
@@ -51,16 +59,15 @@ public class Player : MonoBehaviour, IPlayerControllable
     [SerializeField] private GemsViewCounter _gemsCounterView;
     [SerializeField] private Navigator _navigator;
 
-    private AudioSource _audio;
+    private AudioSource _shootAudio;
     private Rigidbody2D _rb;
 
 
-    private float _reloadTimeMax = 0.5f;
-    private float _reloadTimer = 0f;
+    
 
     //public Vector2 MoveDirection;
     private bool _isLeftGunShoot;
-   
+    private bool _isMobileInput;
 
     private void Awake()
     {
@@ -68,7 +75,7 @@ public class Player : MonoBehaviour, IPlayerControllable
         GameRestarted += RestartLevel;
 
         _navigator = GetComponent<Navigator>();
-        _audio = GetComponent<AudioSource>();
+        _shootAudio = GetComponent<AudioSource>();
         _oxygen = _maxOxygen;
         _scoreView = GetComponent<Score>();
         _rb = GetComponent<Rigidbody2D>();
@@ -103,6 +110,13 @@ public class Player : MonoBehaviour, IPlayerControllable
         transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
 
+    public void Aim(Vector2 vector2)
+    {
+        float rotateZ = Mathf.Atan2(vector2.y, vector2.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, rotateZ - 90);
+        //Shoot();
+    }
+
     public void Shoot()
     {
         if (_reloadTimer < 0)
@@ -110,16 +124,25 @@ public class Player : MonoBehaviour, IPlayerControllable
             if (_isLeftGunShoot)
             {
                 Instantiate(_bullet, _bulletSpawnLeft.position, _bulletSpawnLeft.rotation);
+                ShootEffect(_bulletSpawnLeft);
                 _isLeftGunShoot = false;
             }
             else
             {
                 Instantiate(_bullet, _bulletSpawnRight.position, _bulletSpawnRight.rotation);
+                ShootEffect(_bulletSpawnRight);
                 _isLeftGunShoot = true;
             }
-            _audio.Play();
+            _shootAudio.Play();
             _reloadTimer = _reloadTimeMax;
         }
+    }
+
+    private void ShootEffect(Transform effectTransfrom)
+    {
+        var go = Instantiate(_shootEffect, effectTransfrom);
+        Destroy(go, 0.3f);
+        go.transform.localScale = new Vector3(1f, 1f, 1f) * 0.1f;
     }
 
     public void Dodge()
@@ -140,9 +163,31 @@ public class Player : MonoBehaviour, IPlayerControllable
         _reloadTimer -= Time.fixedDeltaTime;
         _oxygen -= Time.fixedDeltaTime;
         _barManager.SetOxygen((int)_oxygen);
-        Vector3 diference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float rotateZ = Mathf.Atan2(diference.y, diference.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, rotateZ - 90);
+
+        if (!MobileToggle.isOn && _isMobileInput)
+        {
+            _isMobileInput = false;
+            InputChanged?.Invoke(false);
+        }
+        else if (MobileToggle.isOn && !_isMobileInput)
+        {
+            _isMobileInput = true;
+            InputChanged?.Invoke(true);
+        }
+
+        if (!_isMobileInput) 
+        {
+            _mobileCanvas.enabled = false;
+            //Debug.Log(Input.mousePosition);
+            Vector3 diference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            float rotateZ = Mathf.Atan2(diference.y, diference.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, 0f, rotateZ - 90);
+        }
+        else
+        {
+            _mobileCanvas.enabled = true;
+            Debug.Log("mobile");
+        }
 
         if(_oxygen < 0)
         {
